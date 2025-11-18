@@ -42,17 +42,6 @@ Flag
 
 🔄 Requesting and rendering REST API data
 
-📂 Folder Structure
-project/
-│
-├── index.html
-├── style.css
-├── script.js
-│
-└── assets/
-    ├── icons/
-    └── images/
-
 ⚙️ How to Run Locally
 
 Clone the repo
