@@ -1,54 +1,66 @@
-# 🌍 Country Info AJAX App
+🌍 Country Info AJAX App
 
-A beginner-friendly project that fetches and displays country data using the old AJAX (XMLHttpRequest) method.
-Built as part of my JavaScript learning journey.
+Fetch country data using classic AJAX (XMLHttpRequest) — rendered with HTML, CSS, and vanilla JavaScript.
+
+<p align="center"> <img src="https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript" /> <img src="https://img.shields.io/badge/AJAX-XMLHttpRequest-blue" /> <img src="https://img.shields.io/badge/Status-Complete-success" /> <img src="https://img.shields.io/badge/REST%20API-REST%20Countries-green?logo=api" /> </p>
+✨ Overview
+
+This project displays live data about any country using asynchronous AJAX calls made with the XMLHttpRequest API.
+It was built as part of learning asynchronous JavaScript before moving on to Promises and the fetch() API.
 
 🚀 Features
 
-Fetch country data from the REST Countries API
+🌐 Fetch data from the REST Countries API
 
-Display:
+🏙️ Shows:
 
 Country name
 
-Region
+Region & subregion
 
-Currency
+Capital
 
 Population
 
 Flag
 
-Language
+⚡ Fully asynchronous loading
 
-Handles asynchronous loading with XHR
+🎨 Clean UI built with HTML & CSS
 
-Clean UI with HTML & CSS components
+🧩 Beginner-friendly project structure
 
-🧠 What I Learned
+🧠 Key Concepts Learned
 
-How AJAX works under the hood
+📡 How XHR (XMLHttpRequest) works
 
-Using XMLHttpRequest
+⏳ Async behavior using the load event
 
-The load event and async behavior
+📦 Parsing JSON responses
 
-JSON parsing with JSON.parse()
+🏗️ DOM manipulation for dynamic components
 
-DOM manipulation and dynamic UI rendering
+🔄 Requesting and rendering REST API data
 
-📂 Project Structure
-index.html       → main UI structure
-style.css        → basic styling and layout
-script.js        → AJAX logic + DOM rendering
-assets/          → icons and images
+📂 Folder Structure
+project/
+│
+├── index.html
+├── style.css
+├── script.js
+│
+└── assets/
+    ├── icons/
+    └── images/
 
-🔧 How to Run
+⚙️ How to Run Locally
 
-Just open index.html in any browser.
-No build tools or frameworks required.
+Clone the repo
 
-🌐 API Used
+Open index.html in any browser
+No build tools or dependencies required.
+
+🔗 API Used
 
 REST Countries API
-(returns structured data about any country)
+Returns structured data about all nations (flags, population, region, languages, etc.)
