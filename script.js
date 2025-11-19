@@ -4,9 +4,9 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 // Rendering country UI
-const renderCountry = function (data) {
+const renderCountry = function (data, className = "") {
   const html = `
-    <article class="country">
+    <article class="country" ${className}>
       <img class="country__img" src="${data.flag}" />
       <div class="country__data">
         <h3 class="country__name">${data.name}</h3>
@@ -48,7 +48,7 @@ const getCountryAndNeighbour = function (country) {
 
     requestTwo.addEventListener('load', function () {
       const dataTwo = JSON.parse(this.responseText);
-      renderCountry(dataTwo);
+      renderCountry(dataTwo, "neighbour");
     });
   });
 };
