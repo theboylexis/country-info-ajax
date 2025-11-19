@@ -3,109 +3,55 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-// NEW COUNTRIES API URL (use instead of the URL shown in videos):
-//  https://restcountries.com/v2/name/portugal
-
-// NEW REVERSE GEOCODING API URL (use instead of the URL shown in videos):
-// https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
-
-///////////////////////////////////////
-//CREATING AJAX CALLS (OLD WAY - XMLHTTP REQUEST FUNCTION)
-// const getCountryData = function (country) {
-//     const request = new XMLHttpRequest()
-//     //URL to make AJAX call using GET - Background activity(asynchronous)
-//     request.open("GET", `https://restcountries.com/v2/name/${country}`)
-//     request.send()
-//     //registering callback on request object
-//     request.addEventListener("load", function () {
-//         //converting JSON data into an object
-//         const [data] = JSON.parse(this.responseText)
-//         console.log(data)
-
-//         //building component
-//         const html = `
-//     <article class="country">
-//         <img class="country__img" src="${data.flag}" />
-//           <div class="country__data">
-//             <h3 class="country__name">${data.name}</h3>
-//             <h4 class="country__region">${data.region}</h4>
-//             <p class="country__row"><span>👫</span>${+(data.population / 1000000).toFixed(1)}</p>
-//             <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-//             <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-//           </div>
-//     </article>
-//         `
-//         //displaying HTML content
-//         countriesContainer.insertAdjacentHTML("beforeend", html)
-//         //updating opacity style
-//         countriesContainer.style.opacity = 1
-//     })
-// };
-
-//Exporting data into its own functionality
-const renderCountry = function(data) {
-    //Exporting data into its own functionality
-    const html = `
+// Rendering country UI
+const renderCountry = function (data) {
+  const html = `
     <article class="country">
-        <img class="country__img" src="${data.flag}" />
-          <div class="country__data">
-            <h3 class="country__name">${data.name}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${+(data.population / 1000000).toFixed(1)}</p>
-            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-          </div>
+      <img class="country__img" src="${data.flag}" />
+      <div class="country__data">
+        <h3 class="country__name">${data.name}</h3>
+        <h4 class="country__region">${data.region}</h4>
+        <p class="country__row"><span>👫</span>${(
+          data.population / 1000000
+        ).toFixed(1)}</p>
+        <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+        <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+      </div>
     </article>
-        `
-        //displaying HTML content
-        countriesContainer.insertAdjacentHTML("beforeend", html)
-        //updating opacity style
-        countriesContainer.style.opacity = 1
-    })
-}
+  `;
 
-const getCountryAndNeighbour = function (country) {
-    //AJAX call for first country
-    const request = new XMLHttpRequest()
-    //URL to make AJAX call using GET - Background activity(asynchronous)
-    request.open("GET", `https://restcountries.com/v2/name/${country}`)
-    request.send()
-    //registering callback on request object
-    request.addEventListener("load", function () {
-        //converting JSON data into an object
-        const [data] = JSON.parse(this.responseText)
-        console.log(data)
-        
-        //Rendering first country
-        renderCountry(data)
-
-        //Getting neighbour country info
-        const [neighbour] = data.borders?.[0]
-
-        if(!neighbour) return;
-
-        //AJAX call for second country
-        const requestTwo = new XMLHttpRequest()
-        //URL to make AJAX call using GET - Background activity(asynchronous)
-        requesTwo.open("GET", `https://restcountries.com/v2/alpha/${neighbour}`)
-        requestTwo.send()
-
-        requestTwo.addEventListener("load", function () {
-        //converting JSON data into an object
-        const dataTwo = JSON.parse(this.responseText)
-            console.log(dataTwo)
-
-            renderCountry(dataTwo)
-        };
-    };
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
 };
 
+const getCountryAndNeighbour = function (country) {
+  // AJAX call for first country
+  const request = new XMLHttpRequest();
+  request.open('GET', `https://restcountries.com/v2/name/${country}`);
+  request.send();
 
-//SIMULATANEOUS AJAX CALLS
-getCountryAndNeighbour("ghana")
-// getCountryAndNeighbour("nigeria")
-// getCountryAndNeighbour("egypt")
+  request.addEventListener('load', function () {
+    const [data] = JSON.parse(this.responseText);
 
+    // Render first country
+    renderCountry(data);
 
+    // Get neighbour (country code)
+    const neighbour = data.borders?.[0];
 
+    if (!neighbour) return;
 
+    // AJAX call for neighbour
+    const requestTwo = new XMLHttpRequest();
+    requestTwo.open('GET', `https://restcountries.com/v2/alpha/${neighbour}`);
+    requestTwo.send();
+
+    requestTwo.addEventListener('load', function () {
+      const dataTwo = JSON.parse(this.responseText);
+      renderCountry(dataTwo);
+    });
+  });
+};
+
+// Run
+getCountryAndNeighbour('ghana');
