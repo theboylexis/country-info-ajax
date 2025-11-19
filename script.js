@@ -6,7 +6,7 @@ const countriesContainer = document.querySelector('.countries');
 // Rendering country UI
 const renderCountry = function (data, className = "") {
   const html = `
-    <article class="country" ${className}>
+    <article class="country ${className}" >
       <img class="country__img" src="${data.flag}" />
       <div class="country__data">
         <h3 class="country__name">${data.name}</h3>
